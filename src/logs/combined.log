@@ -1,0 +1,4 @@
+15-05-2020 17:53:52 [info] OPTIONS - /api/auth/sign-in | Status 200 | Response Time 4.949 ms
+
+15-05-2020 17:53:52 [info] POST - /api/auth/sign-in | Status 200 | Response Time 137.900 ms
+
