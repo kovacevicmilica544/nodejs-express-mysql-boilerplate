@@ -19,8 +19,8 @@ const defaultPort = 3000;
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
 //db connection
-const sequelize = require('./src/db/connection');
-sequelize.authenticate()
+const db = require('./src/db/connection');
+db.authenticate()
   .then(() => {
     console.log('Connected to database!');
   })

@@ -1,9 +1,15 @@
 const Sequelize = require('sequelize');
-const {MYSQL_USER, MYSQL_PW} = require('../enviroment/enviroment');
+const {DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_HOST, DATABASE_DIALECT} = require('../enviroment/enviroment');
 
-const sequelize = new Sequelize('boilerplate', MYSQL_USER, MYSQL_PW, {
-    host: '127.0.0.1',
-    dialect: 'mysql'
+module.exports = new Sequelize(DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, {
+    host: DATABASE_HOST,
+    dialect: DATABASE_DIALECT,
+    operatorsAliases: false,
+
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
 });
-
-module.exports = sequelize;

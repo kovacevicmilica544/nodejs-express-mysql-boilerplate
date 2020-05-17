@@ -1,4 +1,4 @@
-const {swagger_url} = require('../config/config');
+const {swagger_url} = require('../config/url-config');
 
 const swaggerOptions = {
     swaggerDefinition: {
