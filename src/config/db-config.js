@@ -1,4 +1,4 @@
-const {DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_HOST, DATABASE_DIALECT} = require('../src/enviroment/enviroment');
+const {DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_HOST, DATABASE_DIALECT} = require('../enviroment/enviroment');
 
 module.exports = {
   development: {

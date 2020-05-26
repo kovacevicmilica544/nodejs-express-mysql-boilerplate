@@ -1,5 +1,3 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../db/connection');
 const bcrypt = require('bcrypt');
 
 /**
@@ -25,41 +23,44 @@ const bcrypt = require('bcrypt');
  *          lastName:
  *            type: string
  */
-const User = sequelize.define('users', {
-    id: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    firstName: {
-        type: Sequelize.STRING(25),
-        allowNull: false,
-    },
-    lastName: {
-        type: Sequelize.STRING(25),
-        allowNull: false,
-    },
-    email: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-        unique: true
-    },
-    password: {
-        type: Sequelize.TEXT,
-        allowNull: false,
+
+module.exports = (sequelize, DataTypes) => {
+    const User = sequelize.define('user', {
+        id: {
+            type: DataTypes.INTEGER(11),
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        firstName: {
+            type: DataTypes.STRING(25),
+            allowNull: false,
+        },
+        lastName: {
+            type: DataTypes.STRING(25),
+            allowNull: false,
+        },
+        email: {
+            type: DataTypes.STRING(30),
+            allowNull: false,
+            unique: true
+        },
+        password: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        }
+    });
+
+    User.beforeCreate(function(user, options) {
+        user.password = bcrypt.hashSync(user.password, 10);
+    })
+
+    User.prototype.toJSON =  function () {
+        var values = Object.assign({}, this.get());
+    
+        delete values.password;
+        return values;
     }
-});
 
-User.beforeCreate(function(user, options) {
-    user.password = bcrypt.hashSync(user.password, 10);
-})
-
-User.prototype.toJSON =  function () {
-    var values = Object.assign({}, this.get());
-  
-    delete values.password;
-    return values;
+    return User;
 }
-
-module.exports = User;
