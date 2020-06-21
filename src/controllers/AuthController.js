@@ -53,7 +53,7 @@ const router = express.Router();
  *          description: Internal Server Error
  */
 router.post('/sign-up', 
-    validate(userValidators.registerValidator),
+  //  validate(userValidators.registerValidator),
     (req, res, next) => {
         userService.createUser(req.body)
         .then(data => res.status(201).json(data))
@@ -100,8 +100,10 @@ router.post('/sign-up',
  *          description: Internal Server Error
  */
 router.post('/sign-in',
-    validate(userValidators.loginValidator),
+    //validate(userValidators.loginValidator),
     (req, res, next) => {
+        console.log('--------------------')
+        console.log(req.body)
         authService.auhenticateUser(req.body)
         .then(data => res.status(200).json(data))
         .catch(err => next(err));

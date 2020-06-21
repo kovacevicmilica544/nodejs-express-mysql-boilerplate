@@ -5,9 +5,9 @@ const {ErrorHandler} = require('../utils/error');
 const {JWT_SECRET, JWT_EXPIRE} = require('../enviroment/enviroment');
 
 const auhenticateUser = async(data) => {
-    let user = await userService.getUserByEmail(data.email);
+    let user = await userService.getUserByEmail(data.username);
 
-    if (!user) return Promise.reject(new ErrorHandler(404, `Could not find user with e-mail ${data.email}!`));
+    if (!user) return Promise.reject(new ErrorHandler(404, `Could not find user with e-mail ${data.username}!`));
 
     if (!bcrypt.compareSync(data.password, user.password))
         return Promise.reject(new ErrorHandler(404, `Password is not valid!`));
